@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Generator: Xara Xtreme (www.xara.com), SVG filter version: 1.0.0.13-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   stroke-width="0.501"
+   stroke-linejoin="bevel"
+   fill-rule="evenodd"
+   version="1.1"
+   overflow="visible"
+   width="612pt"
+   height="792pt"
+   viewBox="0 0 612 792"
+   id="svg2"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="XuLA-logo.svg">
+  <metadata
+     id="metadata95">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1148"
+     id="namedview93"
+     showgrid="false"
+     inkscape:zoom="3.1173985"
+     inkscape:cx="363.07073"
+     inkscape:cy="464.88593"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     inkscape:snap-grids="true" />
+  <defs
+     id="defs4">
+    <marker
+       id="DefaultArrow2"
+       markerUnits="strokeWidth"
+       viewBox="0 0 1 1"
+       markerWidth="1"
+       markerHeight="1"
+       overflow="visible"
+       orient="auto">
+      <!-- REF_ARROW_STRAIGHT (-2) -->
+      <g
+         transform="scale(0.0092592592)"
+         id="g7">
+        <!-- 1/108 -->
+        <path
+           d="M -9 54 L -9 -54 L 117 0 z"
+           id="path9" />
+      </g>
+    </marker>
+    <marker
+       id="DefaultArrow3"
+       markerUnits="strokeWidth"
+       viewBox="0 0 1 1"
+       markerWidth="1"
+       markerHeight="1"
+       overflow="visible"
+       orient="auto">
+      <!-- REF_ARROW_ANGLED -->
+      <g
+         transform="scale(0.0092592592)"
+         id="g12">
+        <path
+           d="M -27 54 L -9 0 L -27 -54 L 135 0 z"
+           id="path14" />
+      </g>
+    </marker>
+    <marker
+       id="DefaultArrow4"
+       markerUnits="strokeWidth"
+       viewBox="0 0 1 1"
+       markerWidth="1"
+       markerHeight="1"
+       overflow="visible"
+       orient="auto">
+      <!-- REF_ARROW_ROUNDED -->
+      <g
+         transform="scale(0.0092592592)"
+         id="g17">
+        <path
+           d="M -9,0 L -9,-45 C -9,-51.708 2.808,-56.580 9,-54 L 117,-9 C 120.916,-7.369 126.000,-4.242 126,0 C 126,4.242 120.916,7.369 117,9 L 9,54 C 2.808,56.580 -9,51.708 -9,45 z"
+           id="path19" />
+      </g>
+    </marker>
+    <marker
+       id="DefaultArrow5"
+       markerUnits="strokeWidth"
+       viewBox="0 0 1 1"
+       markerWidth="1"
+       markerHeight="1"
+       overflow="visible"
+       orient="auto">
+      <!-- REF_ARROW_SPOT -->
+      <g
+         transform="scale(0.0092592592)"
+         id="g22">
+        <path
+           d="M -54, 0 C -54,29.807 -29.807,54 0,54 C 29.807,54 54,29.807 54,0 C 54,-29.807 29.807,-54 0,-54 C -29.807,-54 -54,-29.807 -54,0 z"
+           id="path24" />
+      </g>
+    </marker>
+    <marker
+       id="DefaultArrow6"
+       markerUnits="strokeWidth"
+       viewBox="0 0 1 1"
+       markerWidth="1"
+       markerHeight="1"
+       overflow="visible"
+       orient="auto">
+      <!-- REF_ARROW_DIAMOND -->
+      <g
+         transform="scale(0.0092592592)"
+         id="g27">
+        <path
+           d="M -63,0 L 0,63 L 63,0 L 0,-63 z"
+           id="path29" />
+      </g>
+    </marker>
+    <marker
+       id="DefaultArrow7"
+       markerUnits="strokeWidth"
+       viewBox="0 0 1 1"
+       markerWidth="1"
+       markerHeight="1"
+       overflow="visible"
+       orient="auto">
+      <!-- REF_ARROW_FEATHER -->
+      <g
+         transform="scale(0.0092592592)"
+         id="g32">
+        <path
+           d="M 18,-54 L 108,-54 L 63,0 L 108,54 L 18, 54 L -36,0 z"
+           id="path34" />
+      </g>
+    </marker>
+    <marker
+       id="DefaultArrow8"
+       markerUnits="strokeWidth"
+       viewBox="0 0 1 1"
+       markerWidth="1"
+       markerHeight="1"
+       overflow="visible"
+       orient="auto">
+      <!-- REF_ARROW_FEATHER2 -->
+      <g
+         transform="scale(0.0092592592)"
+         id="g37">
+        <path
+           d="M -36,0 L 18,-54 L 54,-54 L 18,-18 L 27,-18 L 63,-54 L 99,-54 L 63,-18 L 72,-18 L 108,-54 L 144,-54 L 90,0 L 144,54 L 108,54 L 72,18 L 63,18 L 99,54 L 63,54 L 27,18 L 18,18 L 54,54 L 18,54 z"
+           id="path39" />
+      </g>
+    </marker>
+    <marker
+       id="DefaultArrow9"
+       markerUnits="strokeWidth"
+       viewBox="0 0 1 1"
+       markerWidth="1"
+       markerHeight="1"
+       overflow="visible"
+       orient="auto">
+      <!-- REF_ARROW_HOLLOWDIAMOND -->
+      <g
+         transform="scale(0.0092592592)"
+         id="g42">
+        <path
+           d="M 0,45 L -45,0 L 0, -45 L 45, 0 z M 0, 63 L-63, 0 L 0, -63 L 63, 0 z"
+           id="path44" />
+      </g>
+    </marker>
+    <filter
+       id="StainedFilter">
+      <feBlend
+         mode="multiply"
+         in2="BackgroundImage"
+         in="SourceGraphic"
+         result="blend"
+         id="feBlend47" />
+      <feComposite
+         in="blend"
+         in2="SourceAlpha"
+         operator="in"
+         result="comp"
+         id="feComposite49" />
+    </filter>
+    <filter
+       id="BleachFilter">
+      <feBlend
+         mode="screen"
+         in2="BackgroundImage"
+         in="SourceGraphic"
+         result="blend"
+         id="feBlend52" />
+      <feComposite
+         in="blend"
+         in2="SourceAlpha"
+         operator="in"
+         result="comp"
+         id="feComposite54" />
+    </filter>
+    <filter
+       id="InvertTransparencyBitmapFilter">
+      <feComponentTransfer
+         id="feComponentTransfer57">
+        <feFuncR
+           type="gamma"
+           amplitude="1.055"
+           exponent=".416666666"
+           offset="-0.055"
+           id="feFuncR59" />
+        <feFuncG
+           type="gamma"
+           amplitude="1.055"
+           exponent=".416666666"
+           offset="-0.055"
+           id="feFuncG61" />
+        <feFuncB
+           type="gamma"
+           amplitude="1.055"
+           exponent=".416666666"
+           offset="-0.055"
+           id="feFuncB63" />
+      </feComponentTransfer>
+      <feComponentTransfer
+         id="feComponentTransfer65">
+        <feFuncR
+           type="linear"
+           slope="-1"
+           intercept="1"
+           id="feFuncR67" />
+        <feFuncG
+           type="linear"
+           slope="-1"
+           intercept="1"
+           id="feFuncG69" />
+        <feFuncB
+           type="linear"
+           slope="-1"
+           intercept="1"
+           id="feFuncB71" />
+        <feFuncA
+           type="linear"
+           slope="1"
+           intercept="0"
+           id="feFuncA73" />
+      </feComponentTransfer>
+      <feComponentTransfer
+         id="feComponentTransfer75">
+        <feFuncR
+           type="gamma"
+           amplitude="1"
+           exponent="2.4"
+           offset="0"
+           id="feFuncR77" />
+        <feFuncG
+           type="gamma"
+           amplitude="1"
+           exponent="2.4"
+           offset="0"
+           id="feFuncG79" />
+        <feFuncB
+           type="gamma"
+           amplitude="1"
+           exponent="2.4"
+           offset="0"
+           id="feFuncB81" />
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <g
+     id="g3046">
+    <path
+       d="m 301.476,404.056 -0.123,0 -8.762,9.432 -4.986,5.832 c 1.958,4.879 4.014,10.55 6.854,16.344 l 0.105,0 6.912,-31.608 z m -13.801,0 -6.686,0 0.976,3.096 c 0.279,0.936 0.654,2.16 1.078,3.528 0.574,-0.864 1.135,-1.656 1.613,-2.376 l 3.019,-4.248 z m -20.839,0 -43.263,0 -29.808,31.608 63.919,0 c 2.216,-2.342 5.026,-5.441 8.007,-8.712 3.111,-3.414 5.633,-6.264 7.439,-8.496 l -3.166,-7.488 -2.391,-5.184 c -0.097,-0.192 -0.356,-0.786 -0.737,-1.728 z m 4.407,31.608 9.467,0 -1.457,-4.032 c -0.403,-1.113 -0.788,-2.664 -1.346,-4.536 l -0.669,1.008 c -0.095,0.144 -0.358,0.432 -0.55,0.72 -0.191,0.288 -0.518,0.662 -0.908,1.152 l -4.537,5.688 z"
+       id="path86"
+       style="font-size:16px;fill:#000140;fill-opacity:1;stroke:none;marker-start:none;marker-end:none;font-family:Times New Roman"
+       inkscape:connector-curvature="0" />
+    <text
+       y="435.883"
+       x="368.00195"
+       xml:space="preserve"
+       transform="matrix(1,0,-0.16068518,1,0,0)"
+       font-size="47.265"
+       stroke-miterlimit="79.8403193612775"
+       id="text88"
+       style="font-size:47.26641846px;fill:#000140;fill-opacity:1;stroke:none;font-family:Eras Ultra ITC"><tspan
+         x="368.00195"
+         y="435.883"
+         id="tspan90"
+         style="fill:#000140;fill-opacity:1">uLA2</tspan></text>
+  </g>
+  <g
+     id="Layer_1"
+     style="font-size:16px;fill:#000140;fill-opacity:1;stroke:#000000;font-family:Times New Roman"
+     transform="matrix(1,0,0,-1,0,792)" />
+</svg>

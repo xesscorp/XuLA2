@@ -1,0 +1,91 @@
+# Use 3.3V LVTTL for all the I/O
+NET * IOSTANDARD = LVTTL;
+
+net clk_i loc=a9; # 12 MHz clock to FPGA.
+
+# I/O to HCSR04 module. 
+net trig_o loc=m15;
+net echo_i loc=m2;
+
+
+# Connect LED Digits module to WING3.
+
+# WING1 connections for LED Digits module.
+#net s_o<0> loc=m15;
+#net s_o<1> loc=m2;
+#net s_o<2> loc=r15;
+#net s_o<3> loc=r1;
+#net s_o<4> loc=r7;
+#net s_o<5> loc=r2;
+#net s_o<6> loc=t7;
+#net s_o<7> loc=t4;
+
+# WING2 connections for LED Digits module.
+#net s_o<0> loc=j16;
+#net s_o<1> loc=h2;
+#net s_o<2> loc=k16;
+#net s_o<3> loc=h1;
+#net s_o<4> loc=k15;
+#net s_o<5> loc=j4;
+#net s_o<6> loc=m16;
+#net s_o<7> loc=k3;
+
+# WING3 connections for LED Digits module.
+net s_o<0> loc=b15;
+net s_o<1> loc=b16;
+net s_o<2> loc=c1;
+net s_o<3> loc=c16;
+net s_o<4> loc=f16;
+net s_o<5> loc=e1;
+net s_o<6> loc=f2;
+net s_o<7> loc=j14;
+
+# PM2 connections for LED Digits module.
+#net s_o<0> loc=r1;
+#net s_o<1> loc=t4;
+#net s_o<2> loc=r15;
+#net s_o<3> loc=t7;
+#net s_o<4> loc=m2;
+#net s_o<5> loc=r2;
+#net s_o<6> loc=m15;
+#net s_o<7> loc=r7;
+
+# PM3 connections for LED Digits module.
+#net s_o<0> loc=k3;
+#net s_o<1> loc=r1;
+#net s_o<2> loc=m16;
+#net s_o<3> loc=r15;
+#net s_o<4> loc=j4;
+#net s_o<5> loc=m2;
+#net s_o<6> loc=k15;
+#net s_o<7> loc=m15;
+
+# PM4 connections for LED Digits module.
+#net s_o<0> loc=h1;
+#net s_o<1> loc=k3;
+#net s_o<2> loc=k16;
+#net s_o<3> loc=m16;
+#net s_o<4> loc=h2;
+#net s_o<5> loc=j4;
+#net s_o<6> loc=j16;
+#net s_o<7> loc=k15;
+
+# PM5 connections for LED Digits module.
+#net s_o<0> loc=j14;
+#net s_o<1> loc=h1;
+#net s_o<2> loc=f2;
+#net s_o<3> loc=k16;
+#net s_o<4> loc=e1;
+#net s_o<5> loc=h2;
+#net s_o<6> loc=f16;
+#net s_o<7> loc=j16;
+
+# PM6 connections for LED Digits module.
+#net s_o<0> loc=c16;
+#net s_o<1> loc=j14;
+#net s_o<2> loc=c1;
+#net s_o<3> loc=f2;
+#net s_o<4> loc=b16;
+#net s_o<5> loc=e1;
+#net s_o<6> loc=b15;
+#net s_o<7> loc=f16;
