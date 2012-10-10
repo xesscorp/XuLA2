@@ -125,6 +125,10 @@ NET sdWe_bo        IOSTANDARD = LVTTL | SLEW=SLOW | DRIVE=6;
 NET sdData_io*     IOSTANDARD = LVTTL | SLEW=SLOW | DRIVE=6;
 NET sdDqmh_o       IOSTANDARD = LVTTL | SLEW=SLOW | DRIVE=6;
 NET sdDqml_o       IOSTANDARD = LVTTL | SLEW=SLOW | DRIVE=6;
+NET usdflashCs_bo  IOSTANDARD = LVTTL;
+NET flashCs_bo     IOSTANDARD = LVTTL;
+NET sclk_o         IOSTANDARD = LVTTL;
+NET mosi_o         IOSTANDARD = LVTTL;
 NET chan*          IOSTANDARD = LVTTL;
 
 ##############################
