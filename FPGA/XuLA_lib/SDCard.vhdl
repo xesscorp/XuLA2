@@ -89,7 +89,7 @@ package SdCardPckg is
     generic (
       FREQ_G          : real    := 100.0;  -- Master clock frequency (MHz).
       INIT_SPI_FREQ_G : real    := 0.4;  -- Slow SPI clock freq. during initialization (MHz).
-      SPI_FREQ_G      : real    := 1.0;  -- Operational SPI freq. to the SD card (MHz).
+      SPI_FREQ_G      : real    := 25.0;  -- Operational SPI freq. to the SD card (MHz).
       BLOCK_SIZE_G    : natural := 512  -- Number of bytes in an SD card block or sector.
       );
     port (
@@ -145,7 +145,7 @@ entity SdCardCtrl is
   generic (
     FREQ_G          : real    := 100.0;  -- Master clock frequency (MHz).
     INIT_SPI_FREQ_G : real    := 0.4;  -- Slow SPI clock freq. during initialization (MHz).
-    SPI_FREQ_G      : real    := 1.0;  -- Operational SPI freq. to the SD card (MHz).
+    SPI_FREQ_G      : real    := 25.0;  -- Operational SPI freq. to the SD card (MHz).
     BLOCK_SIZE_G    : natural := 512  -- Number of bytes in an SD card block or sector.
     );
   port (
@@ -289,8 +289,8 @@ begin
           
           when INIT =>  -- Deselect the SD card and send it a bunch of clock pulses with MOSI high.
             error_o          <= (others => ZERO);  -- Clear error flags.
-            clkDivider_v     := INIT_SCLK_PHASE_PERIOD_C;  -- Use slow SPI clock freq during init.
-            sclkPhaseTimer_v := INIT_SCLK_PHASE_PERIOD_C;  -- and set the duration of the next clock phase.
+            clkDivider_v     := INIT_SCLK_PHASE_PERIOD_C - 1;  -- Use slow SPI clock freq during init.
+            sclkPhaseTimer_v := INIT_SCLK_PHASE_PERIOD_C - 1;  -- and set the duration of the next clock phase.
             sclk_r           <= LO;     -- Start with low clock to the SD card.
             hndShk_r         <= LO;     -- Initialize handshake signal.
             addr_v           := (others => ZERO);  -- Initialize address.
@@ -341,7 +341,7 @@ begin
             end if;
             
           when WAIT_FOR_HOST_RW =>  -- Wait for the host to read or write a block of data from the SD card.
-            clkDivider_v     := SCLK_PHASE_PERIOD_C;  -- Set SPI clock frequency for normal operation.
+            clkDivider_v     := SCLK_PHASE_PERIOD_C - 1;  -- Set SPI clock frequency for normal operation.
             getCmdResponse_v := true;  -- Get R1 response to any commands issued to the SD card.
             if rd_i = YES then  -- send READ command and address to the SD card.
               cs_bo <= LO;              -- Enable the SD card.

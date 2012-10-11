@@ -170,7 +170,7 @@
     <property xil_pn:name="Incremental Compilation" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Insert Buffers to Prevent Pulse Swallowing" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Instantiation Template Target Language Xps" xil_pn:value="VHDL" xil_pn:valueState="default"/>
-    <property xil_pn:name="JTAG Pin TCK" xil_pn:value="Float" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="JTAG Pin TCK" xil_pn:value="Pull Down" xil_pn:valueState="non-default"/>
     <property xil_pn:name="JTAG Pin TDI" xil_pn:value="Float" xil_pn:valueState="non-default"/>
     <property xil_pn:name="JTAG Pin TDO" xil_pn:value="Float" xil_pn:valueState="non-default"/>
     <property xil_pn:name="JTAG Pin TMS" xil_pn:value="Float" xil_pn:valueState="non-default"/>
