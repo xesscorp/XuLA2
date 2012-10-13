@@ -23,74 +23,96 @@
 --
 -- OPERATION
 --
--- Give the interface a clock that has a higher frequency than the SPI SCLK.
+-- Set-up:
+--     First of all, you have to give the controller a clock signal on the clk_i 
+--     input with a higher frequency than the serial clock sent to the SD card 
+--     through the sclk_o output. You can set generic parameters for the 
+--     controller to tell it the master clock frequency (100 MHz), the SCLK 
+--     frequency for initialization (400 KHz), the SCLK frequency for normal 
+--     operation (25 MHz), the size of data sectors in the Flash memory (512 bytes),
+--     and the type of card (either SD or SDHC). I typically use a 100 MHz 
+--     clock if I'm running an SD card with a 25 Mbps serial data stream. 
+--   
+-- Initialize it:
+--     Pulsing the reset_i input high and then bringing it low again will make 
+--     the controller initialize the SD card so it will work in SPI mode. 
+--     Basically, it sends the card the commands CMD0 and then ACMD41 (which is 
+--     CMD55 followed by CMD41). The busy_o output will be high during the 
+--     initialization and will go low once it is done. 
+--    
+--     After the initialization command sequence, the SD card will send back an R1
+--     response byte. If only the IDLE bit of the R1 response is set, then the 
+--     controller will repeatedly re-try the ACMD41 command while busy_o remains 
+--     high. 
+--    
+--     If any other bit of the R1 response is set, then an error occurred. The 
+--     controller will stall, lower busy_o, and output the R1 response code on the
+--     error_o bus. You'll have to pulse reset_i to unfreeze the controller. 
 --
--- Pulse the reset_i input. The interface will initialize the SD card so
--- it will work in SPI mode. Basically, it sends the card CMD0 and then
--- ACMD41 (which is CMD55 followed by CMD41). The busy_o output will be
--- high during the initialization.
+--     If the R1 response is all zeroes (i.e., no errors occurred during the 
+--     initialization), then the controller will lower busy_o and wait for a 
+--     read or write operation from the host. The controller will only accept new
+--     operations when busy_o is low.
 --
--- After the initialization command sequence, the SD card will send back 
--- an all-zero R1 response. If only the IDLE bit of the R1 response is 
--- set, then the interface will repeatedly re-try the ACMD41 command while
--- busy_o remains high.
+-- Write data:
+--     To write a data block to the SD card, the address of a block is placed 
+--     on the addr_i input bus and the wr_i input is raised. The address and 
+--     write strobe can be removed once busy_o goes high to indicate the write 
+--     operation is underway. The data to be written to the SD card is passed as 
+--     follows: 
 --
--- If any other bit of the R1 response is set, then an error occurred. 
--- The interface will stall and lower busy_o and reset_i must be raised to
--- unfreeze it. The R1 response will be output on the error_o output bus.
+--     1. The controller requests a byte of data by raising the hndShk_o output.
+--     2. The host applies the next byte to the data_i input bus and raises the 
+--        hndShk_i input.
+--     3. The controller accepts the byte and lowers the hndShk_o output.
+--     4. The host lowers the hndShk_i input.
 --
--- If the R1 response is all zeroes, then the interface will lower busy_o 
--- and wait for a read or write operation from the host. The interface 
--- will only accept new operations when busy_o is low.
+--     This sequence of steps is repeated until all BLOCK_SIZE_G bytes of the 
+--     data block are passed from the host to the controller. Once all the data 
+--     is passed, the sector on the SD card will be written and the busy_o output 
+--     will be lowered. 
 --
--- To write data to the SD card, the address of a block is placed on
--- the addr_i input bus and the wr_i input is raised. The address and
--- write strobe can be removed once busy_o goes high to indicate 
--- the write operation is underway. The data to be written to the 
--- SD card is passed as follows:
---   1. The hndShk_o output from the interface goes high.
---   2. The host applies the next data word to the data_i input bus
---      and raises the hndShk_i input.
---   3. The interface lowers the hndShk_o output.
---   4. The host lowers the hndShk_i input.
--- This sequence of steps is repeated until all BLOCK_SIZE_G data
--- words are passed from the host to the interface. Once all the data 
--- is passed, the sector on the SD card will be written and the busy_o
--- output will be lowered.
+-- Read data:
+--     To read a block of data from the SD card, the address of a block is 
+--     placed on the addr_i input bus and the rd_i input is raised. The address 
+--     and read strobe can be removed once busy_o goes high to indicate the read 
+--     operation is underway. The data read from the SD card is passed to the 
+--     host as follows: 
 --
--- To read data from the SD card, the address of a block is placed on
--- the addr_i input bus and the rd_i input is raised. The address and
--- read strobe can be removed once busy_o goes high to indicate 
--- the read operation is underway. The data read from the SD card 
--- is passed to the host as follows:
---   1. The hndShk_o output from the interface goes high.
---   2. The host reads the next data word from the data_o output bus
---      and raises the hndShk_i input.
---   3. The interface lowers the hndShk_o output.
---   4. The host lowers the hndShk_i input.
--- This sequence of steps is repeated until all BLOCK_SIZE_G data
--- words are passed from the interface to the host. Once all the data 
--- is read, the busy_o output will be lowered.
+--     1. The controller raises the hndShk_o output when the next data byte is available.
+--     2. The host reads the byte from the data_o output bus and raises the hndShk_i input.
+--     3. The controller lowers the hndShk_o output.
+--     4. The host lowers the hndShk_i input.
 --
--- If an error is detected during either a read or write operation,
--- then the interface will stall and lower busy_o and reset_i must be raised to
--- unfreeze it. An error code will be output on the error_o output bus.
---*********************************************************************
+--     This sequence of steps is repeated until all BLOCK_SIZE_G bytes of the 
+--     data block are passed from the controller to the host. Once all the data 
+--     is read, the busy_o output will be lowered.
+--
+-- Handle errors:
+--     If an error is detected during either a read or write operation, then the
+--     controller will stall, lower busy_o, and output an error code on the 
+--     error_o bus. You'll have to pulse reset_i to unfreeze the controller. That 
+--     may seem a bit excessive, but it does guarantee that you can't ignore any 
+--     errors that occur. 
+-- *********************************************************************
 
 
-  library ieee;
+library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.CommonPckg.all;
 
 package SdCardPckg is
 
+  type CardType_t is (SD_CARD_E, SDHC_CARD_E);  -- Define the different types of SD cards.
+
   component SdCardCtrl is
     generic (
-      FREQ_G          : real    := 100.0;  -- Master clock frequency (MHz).
-      INIT_SPI_FREQ_G : real    := 0.4;  -- Slow SPI clock freq. during initialization (MHz).
-      SPI_FREQ_G      : real    := 25.0;  -- Operational SPI freq. to the SD card (MHz).
-      BLOCK_SIZE_G    : natural := 512  -- Number of bytes in an SD card block or sector.
+      FREQ_G          : real       := 100.0;   -- Master clock frequency (MHz).
+      INIT_SPI_FREQ_G : real       := 0.4;  -- Slow SPI clock freq. during initialization (MHz).
+      SPI_FREQ_G      : real       := 25.0;  -- Operational SPI freq. to the SD card (MHz).
+      BLOCK_SIZE_G    : natural    := 512;  -- Number of bytes in an SD card block or sector.
+      CARD_TYPE_G     : CardType_t := SD_CARD_E  -- Type of SD card connected to this controller.
       );
     port (
       -- Host-side interface signals.
@@ -140,13 +162,15 @@ use ieee.math_real.all;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.CommonPckg.all;
+use work.SdCardPckg.all;
 
 entity SdCardCtrl is
   generic (
-    FREQ_G          : real    := 100.0;  -- Master clock frequency (MHz).
-    INIT_SPI_FREQ_G : real    := 0.4;  -- Slow SPI clock freq. during initialization (MHz).
-    SPI_FREQ_G      : real    := 25.0;  -- Operational SPI freq. to the SD card (MHz).
-    BLOCK_SIZE_G    : natural := 512  -- Number of bytes in an SD card block or sector.
+    FREQ_G          : real       := 100.0;   -- Master clock frequency (MHz).
+    INIT_SPI_FREQ_G : real       := 0.4;  -- Slow SPI clock freq. during initialization (MHz).
+    SPI_FREQ_G      : real       := 25.0;  -- Operational SPI freq. to the SD card (MHz).
+    BLOCK_SIZE_G    : natural    := 512;  -- Number of bytes in an SD card block or sector.
+    CARD_TYPE_G     : CardType_t := SD_CARD_E  -- Type of SD card connected to this controller.
     );
   port (
     -- Host-side interface signals.
@@ -200,7 +224,7 @@ begin
       RECEIVE,                          -- Receive bits from the SD card.
       DESELECT,  -- De-select the SD card and send some clock pulses (Must enter with sclk at zero.)
       PULSE_SCLK,  -- Issue some clock pulses. (Must enter with sclk at zero.)
-      REPORT_ERROR  -- Report error and stall until reset.
+      REPORT_ERROR                      -- Report error and stall until reset.
       );
     variable state_v    : FsmState_t := INIT;  -- Current state of the FSM.
     variable rtnState_v : FsmState_t;  -- State FSM returns to when FSM subroutine completes.
@@ -345,10 +369,16 @@ begin
             getCmdResponse_v := true;  -- Get R1 response to any commands issued to the SD card.
             if rd_i = YES then  -- send READ command and address to the SD card.
               cs_bo <= LO;              -- Enable the SD card.
-              if continue_i = YES then
-                addr_v  := addr_v + 1;
+              if continue_i = YES then -- Multi-block writes.
+                if CARD_TYPE_G = SD_CARD_E then
+                  -- SD cards use byte-addressing, so add block-size to get next block address.
+                  addr_v := addr_v + BLOCK_SIZE_G;
+                else
+                  -- SDHC cards use block-addressing, so just increment current address to get next block address.
+                  addr_v := addr_v + 1;
+                end if;
                 txCmd_v := READ_BLK_CMD_C & std_logic_vector(addr_v) & FAKE_CRC_C;
-              else
+              else -- Single-block write.
                 txCmd_v := READ_BLK_CMD_C & addr_i & x"FF";
                 addr_v  := unsigned(addr_i);
               end if;
@@ -357,8 +387,14 @@ begin
               rtnState_v := READ_START_TOKEN;  -- Then go to this state after the command is sent.
             elsif wr_i = YES then  -- send WRITE command and address to the SD card.
               cs_bo <= LO;              -- Enable the SD card.
-              if continue_i = YES then
-                addr_v  := addr_v + 1;
+              if continue_i = YES then -- Multi-block read.
+                if CARD_TYPE_G = SD_CARD_E then
+                  -- SD cards use byte-addressing, so add block-size to get next block address.
+                  addr_v := addr_v + BLOCK_SIZE_G;
+                else
+                  -- SDHC cards use block-addressing, so just increment current address to get next block address.
+                  addr_v := addr_v + 1;
+                end if;
                 txCmd_v := WRITE_BLK_CMD_C & std_logic_vector(addr_v) & FAKE_CRC_C;
               else
                 txCmd_v := WRITE_BLK_CMD_C & addr_i & x"FF";
@@ -532,7 +568,7 @@ begin
             sclk_r           <= not sclk_r;    -- Toggle the SPI clock...
             sclkPhaseTimer_v := clkDivider_v;  -- and set the duration of the next clock phase.
             
-          when REPORT_ERROR => -- Report the error code and stall here until a reset occurs.
+          when REPORT_ERROR =>  -- Report the error code and stall here until a reset occurs.
             error_o(rx_v'range) <= rx_v;  -- Output the R1 status as the error code.
 
           when others =>
