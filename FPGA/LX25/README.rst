@@ -37,6 +37,10 @@ Each of these directories contains a complete Xilinx ISE WebPACK 13 design proje
 
     rand_test/:
         This design uses the hostio module to gather samples from the random-number generator module.
+        
+    SdcardTest/:
+        This design tests the SD card controller module by having a PC write and read data blocks
+        through the USB link.
 
     test_board_jtag/:
         This design is used by GXSTEST to test the SDRAM and report the success or failure
