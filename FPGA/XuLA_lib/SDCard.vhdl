@@ -40,8 +40,8 @@
 --     Initialize it:
 --         Pulsing the reset_i input high and then bringing it low again will make 
 --         the controller initialize the SD card so it will work in SPI mode. 
---         Basically, it sends the card the commands CMD0 and then ACMD41 (which is 
---         CMD55 followed by CMD41). The busy_o output will be high during the 
+--         Basically, it sends the card the commands CMD0, CMD8 and then ACMD41 (which
+--         is CMD55 followed by CMD41). The busy_o output will be high during the 
 --         initialization and will go low once it is done. 
 --        
 --         After the initialization command sequence, the SD card will send back an R1
