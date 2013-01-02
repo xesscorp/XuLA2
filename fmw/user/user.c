@@ -1,5 +1,5 @@
 //*********************************************************************
-// Copyright (C) 2010 Dave Vanden Bout / XESS Corp. / www.xess.com
+// Copyright (C) 2010-2013 Dave Vanden Bout / XESS Corp. / www.xess.com
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,6 +15,11 @@
 // with this program; if not, write to the Free Software Foundation, Inc.,
 // 51 Franklin St, Fifth Floor, Boston, MA 02110, USA
 //
+//====================================================================
+//
+// The code for reading the analog I/O pins of the uC was developed
+// by Alireza Moini (amx1345@yahoo.com.au).
+// 
 //====================================================================
 //
 // Module Description:
@@ -57,6 +62,12 @@ typedef union DATA_PACKET
     {
         USBCMD cmd;
         BYTE   len;
+    };
+    struct // for ADC conversions
+    {
+        USBCMD cmd;
+        BYTE   adc_high;
+        BYTE   adc_low;
     };
     struct
     {
@@ -248,8 +259,11 @@ void UserInit( void )
     // Enable high slew-rate for the I/O pins.
     SLRCON = 0;
     // Disable analog functions of the I/O pins.
+    // Enable the one for RB5 and RC2
     ANSEL = 0;
     ANSELH = 0;
+    ANSELbits.ANS6  = 1;
+    ANSELHbits.ANS11 = 1;
     // Initialize the JTAG pins to/from the FPGA.
     INIT_TCK();
     INIT_TMS();
@@ -258,8 +272,21 @@ void UserInit( void )
     // Initialize disable pin for FPGA config. flash.
     INIT_FLSHDSBL();
     // Initialize the analog I/O pins.
-    INIT_ANIO0();
-    INIT_ANIO1();
+    // INIT_ANIO0();
+    // INIT_ANIO1();
+    TRISCbits.TRISC2  = 1;              // Make the pin an analog input.
+    TRISBbits.TRISB5  = 1;              // Make the pin an analog input.
+    REFCON0bits.FVR1EN= 1;              // Enable the fixed voltage reference.
+    REFCON0bits.FVR1S1= 1;              // Set the voltage reference ...
+    REFCON0bits.FVR1S0= 0;              // ... output to 2.048V.
+    ADCON2bits.ADCS   = 0x6;            // ADC conversion clock = F/64.
+    ADCON2bits.ACQT   = 0x5;            // Acquisition time = 12 * Tad.
+    ADCON1bits.NVCFG0 = 0;              // Set negative voltage reference ...
+    ADCON1bits.NVCFG1 = 0;              // ... for the ADC to GND.
+    ADCON1bits.PVCFG0 = 0;              // Set positive voltage reference ...
+    ADCON1bits.PVCFG1 = 1;              // ... for the ADC to fixed voltage ref.
+    ADCON0bits.ADON   = 1;              // Turn the ADC on.
+    ADCON2bits.ADFM   = 1;              // Right-justify the ADC output.
     // Initialize the FPGA configuration pins.
     INIT_DONE();
     INIT_PROGB();
@@ -1220,6 +1247,26 @@ PRI_TAP_LOOP_1:
                     FLSHDSBL_TRIS = OUTPUT_PIN;
                 }
                 num_return_bytes = 2;           // Return the entire command as an acknowledgement.
+                break;
+
+            case AIO0_ADC_CMD: //Perform an adc conversion and return the value
+                InPacket->cmd = cmd;
+                ADCON0bits.CHS = 0x6;              // select channel AN6
+                ADCON0bits.GO = 1;              // Start AD conversion
+                while(ADCON0bits.NOT_DONE);     // Wait for conversion
+                InPacket->adc_high = ADRESH;
+                InPacket->adc_low = ADRESL;
+                num_return_bytes = 3;
+                break;
+
+            case AIO1_ADC_CMD: //Perform an adc conversion and return the value
+                InPacket->cmd = cmd;
+                ADCON0bits.CHS = 0xb;              // select channel AN11
+                ADCON0bits.GO = 1;              // Start AD conversion
+                while(ADCON0bits.NOT_DONE);     // Wait for conversion
+                InPacket->adc_high = ADRESH;
+                InPacket->adc_low = ADRESL;
+                num_return_bytes = 3;
                 break;
 
             case READ_EEDATA_CMD:

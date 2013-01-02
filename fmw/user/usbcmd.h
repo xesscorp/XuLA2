@@ -52,6 +52,8 @@ typedef enum
     DISABLE_RETURN_CMD     = 0x4e,  // ** Disable return of info in response to a command.
     JTAG_CMD               = 0x4f,  // Send multiple TMS & TDI bits while receiving multiple TDO bits.
     FLASH_ONOFF_CMD        = 0x50,  // Enable/disable the FPGA configuration flash.
+    AIO0_ADC_CMD           = 0x60,  // Do an ADC conversion on AIO0 (AN6 pin on pic)
+    AIO1_ADC_CMD           = 0x61,  // Do an ADC conversion on AIO1 (AN11 pin on pic)
     RESET_CMD              = 0xff   // Cause a power-on reset.
 } USBCMD;
 
