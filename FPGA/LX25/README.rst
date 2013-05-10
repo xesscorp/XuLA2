@@ -21,18 +21,29 @@ Each of these directories contains a complete Xilinx ISE WebPACK 13 design proje
         This design is used by GXSLOAD when it needs to read or write the contents of the
         serial flash configuration memory on the XuLA board.
 
+    fintf_jtag_new/:
+        This design is used by xsload.py when it needs to read or write the contents of the
+        serial flash configuration memory on the XuLA board.
+
     hcsr04_test/:
         A simple interface to test an HCSR04 ultrasonic distance measurement module.
 
     hostio_test/:
         This design is used to test the ability of the HostIo modules to pass
         data back-and-forth between the FPGA and the host PC.
+        
+    HostIoToI2c:
+        This design allows a host PC to talk to an I2C peripheral.
 		
 	LedDigitsWings/:
 		A design that uses three StickIt! LED Modules for testing the wing connectors on the StickIt! motherboard.
 
     ramintfc_jtag/:
         This design is used by GXSLOAD when it needs to read or write the contents of the
+        SDRAM on the XuLA board.
+
+    ramintfc_jtag_new/:
+        This design is used by xsload.py when it needs to read or write the contents of the
         SDRAM on the XuLA board.
 
     rand_test/:
@@ -44,6 +55,10 @@ Each of these directories contains a complete Xilinx ISE WebPACK 13 design proje
 
     test_board_jtag/:
         This design is used by GXSTEST to test the SDRAM and report the success or failure
+        through the JTAG and USB links.
+
+    test_board_jtag_new/:
+        This design is used by xstest.py to test the SDRAM and report the success or failure
         through the JTAG and USB links.
 
 =back

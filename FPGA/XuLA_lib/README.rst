@@ -34,6 +34,17 @@ These are HDL files for modules that are useful in a variety of larger designs.
         A set of modules that let a host PC pass data back-and-forth with
         a user design running in the FPGA.
         
+    HostIoToI2c.vhd:
+        An interface that lets the host PC pass data back-and-forth with
+        a chip that has an I2C interface.
+        
+    HostIoToSpi.vhd:
+        An interface that lets the host PC pass data back-and-forth with
+        a chip that has an SPI interface.
+        
+    I2c.vhd:
+        A master-to-slave I2C interface.
+        
     LedDigits.vhd:
         An interface to the Charlieplexed LED array on the StickIt! LED Digits module.
 
@@ -55,6 +66,9 @@ These are HDL files for modules that are useful in a variety of larger designs.
     SdramCntl.vhd:
         An interface module that makes an SDRAM appear as a simple SRAM-like memory to
         a user design in the FPGA.
+        
+    Spi.vhd:
+        A master-to-slave SPI interface.
 
     SyncToClk.vhd:
         Modules that sync one or more signals crossing from one clock domain to another.
