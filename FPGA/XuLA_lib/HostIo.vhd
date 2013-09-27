@@ -994,17 +994,17 @@ begin
                   activateClk_r <= HI;
                 when 1 =>
                   -- Only one input to DUT, so drive it directly from the TDI pin.
-                  vectorToDut_o(0) <= tdi_s;
+                  vectorToDut_o(vectorToDut_o'low) <= tdi_s;
                   activateClk_r    <= HI;
                 when others =>
                   if shiftReg_r(0) = NO then  -- Shifting in data from host before applying it to the DUT. 
-                    shiftReg_r(vectorToDut_o'range) <= tdi_s & shiftReg_r(vectorToDut_o'high downto 1);
+                    shiftReg_r(vectorToDut_o'length-1 downto 0) <= tdi_s & shiftReg_r(vectorToDut_o'length-1 downto 1);
                   else  -- Vector from host received, now apply it to the DUT.
-                    vectorToDut_o                  <= tdi_s & shiftReg_r(vectorToDut_o'high downto 1);  -- Output test vector to DUT.
+                    vectorToDut_o                  <= tdi_s & shiftReg_r(vectorToDut_o'length-1 downto 1);  -- Output test vector to DUT.
                     activateClk_r                  <= HI;  -- Pulse vector clock for one cycle after vector is received.
                     -- Clear shift register so it can receive another vector from the host.
                     shiftReg_r                     <= (others => ZERO);  -- Clear all shift register bits and ...
-                    shiftReg_r(vectorToDut_o'high) <= HI;  -- ... set MSbit so we can tell when all bits are received.
+                    shiftReg_r(vectorToDut_o'length-1) <= HI;  -- ... set MSbit so we can tell when all bits are received.
                   end if;
               end case;
 
@@ -1013,7 +1013,7 @@ begin
                 shiftReg_r <= ZERO & shiftReg_r(shiftReg_r'high downto 1);  -- Shift register contents.
                 bitCntr_r  <= bitCntr_r - 1;  -- One more bit has been sent to the host.
               else  -- Load the DUT output bits into the shift register.
-                shiftReg_r(vectorFromDut_i'range) <= vectorFromDut_i;  -- Load the DUT outputs into the host shift register.
+                shiftReg_r(vectorFromDut_i'length-1 downto 0) <= vectorFromDut_i;  -- Load the DUT outputs into the host shift register.
                 bitCntr_r                         <= vectorFromDut_i'length - 1;  -- Set the number of bits to send.
               end if;
 
@@ -1030,7 +1030,7 @@ begin
         opcodeRcvd_r            <= NO;
         shiftReg_r              <= (others => ZERO);  -- Clear all shift register bits and ...
         if vectorToDut_o'length > 0 then
-          shiftReg_r(vectorToDut_o'high) <= ONE;  -- ... set MSbit so we can tell when all bits are received.
+          shiftReg_r(vectorToDut_o'length-1) <= ONE;  -- ... set MSbit so we can tell when all bits are received.
         end if;
         bitCntr_r     <= 0;
       end if;
