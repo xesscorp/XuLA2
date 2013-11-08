@@ -42,15 +42,15 @@ package RotaryEncoderPckg is
 
   component RotaryEncoderWithCounter is
     generic (
-      ALLOW_ROLLOVER_G : boolean := false;
-      INITIAL_CNT_G    : natural
+      ALLOW_ROLLOVER_G : boolean := false;  -- If true, allow counter to rollover from 0xf..ff to 0.
+      INITIAL_CNT_G    : integer := 0   -- Initial value of counter.
       );
     port (
       clk_i   : in  std_logic;          -- Input clock.
       reset_i : in  std_logic := NO;    -- Reset.
       a_i     : in  std_logic;          -- A phase of rotary encoder.
       b_i     : in  std_logic;          -- B phase of rotary encoder.
-      cnt_o   : out std_logic_vector
+      cnt_o   : out std_logic_vector    -- counter output.
       );
   end component;
 
@@ -82,19 +82,22 @@ entity RotaryEncoder is
 end entity;
 
 architecture arch of RotaryEncoder is
-  signal aDelay_r : std_logic_vector(2 downto 0);
+  signal aDelay_r : std_logic_vector(2 downto 0);  -- Delay lines for sync'ing A and B inputs to clock.
   signal bDelay_r : std_logic_vector(aDelay_r'range);
 begin
   
   process(clk_i)
   begin
+    -- Load A and B inputs into delay lines.
     if rising_edge(clk_i) then
       aDelay_r <= a_i & aDelay_r(aDelay_r'high downto 1);
       bDelay_r <= b_i & bDelay_r(bDelay_r'high downto 1);
     end if;
   end process;
 
+  -- Enable output goes high whenever there is a transition on A or B.
   en_o <= aDelay_r(1) xor aDelay_r(0) xor bDelay_r(1) xor bDelay_r(0);
+  -- Direction of rotation is determined by current value of A and previous value of B.
   cw_o <= aDelay_r(1) xor bDelay_r(0);
   
 end architecture;
@@ -116,15 +119,15 @@ use work.RotaryEncoderPckg.all;
 
 entity RotaryEncoderWithCounter is
   generic (
-    ALLOW_ROLLOVER_G : boolean := false;
-    INITIAL_CNT_G    : integer
+    ALLOW_ROLLOVER_G : boolean := false;  -- If true, allow counter to rollover from 0xf..ff to 0.
+    INITIAL_CNT_G    : integer := 0     -- Initial value of counter.
     );
   port (
     clk_i   : in  std_logic;            -- Input clock.
     reset_i : in  std_logic := NO;      -- Reset.
     a_i     : in  std_logic;            -- A phase of rotary encoder.
     b_i     : in  std_logic;            -- B phase of rotary encoder.
-    cnt_o   : out std_logic_vector
+    cnt_o   : out std_logic_vector      -- counter output.
     );
 end entity;
 
@@ -149,12 +152,12 @@ begin
     if rising_edge(clk_i) then
       if reset_i = YES then
         cnt_r <= TO_SIGNED(INITIAL_CNT_G, cnt_o'length);
-      elsif en_s = HI then
-        if cw_s = YES then
+      elsif en_s = HI then              -- A rotational increment occured.
+        if cw_s = YES then              -- A clockwise movement occured.
           if ALLOW_ROLLOVER_G or cnt_r /= MAX_CNT_C then
             cnt_r <= cnt_r + 1;
           end if;
-        else
+        else                -- A counter-clockwise movement occured.
           if ALLOW_ROLLOVER_G or cnt_r /= 0 then
             cnt_r <= cnt_r - 1;
           end if;
