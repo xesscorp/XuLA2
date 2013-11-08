@@ -14,7 +14,7 @@
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 -- 02111-1307, USA.
 --
--- ©1997-2011 - X Engineering Software Systems Corp. (www.xess.com)
+-- ï¿½1997-2011 - X Engineering Software Systems Corp. (www.xess.com)
 ----------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ package body CommonPckg is
   begin
     b(b'high) := g(b'high);
     for i in g'high-1 downto g'low loop
-      b(i) := b(i+1) xor b(i);
+      b(i) := b(i+1) xor g(i);
     end loop;
     return b;
   end function GrayToBinary;
