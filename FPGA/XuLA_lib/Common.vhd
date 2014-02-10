@@ -14,7 +14,7 @@
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 -- 02111-1307, USA.
 --
--- �1997-2011 - X Engineering Software Systems Corp. (www.xess.com)
+-- ©1997-2011 - X Engineering Software Systems Corp. (www.xess.com)
 ----------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------
