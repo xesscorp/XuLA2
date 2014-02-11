@@ -202,9 +202,9 @@
     <property xil_pn:name="Do Not Escape Signal and Instance Names in Netlist" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Done (Output Events)" xil_pn:value="Default (4)" xil_pn:valueState="default"/>
     <property xil_pn:name="Drive Awake Pin During Suspend/Wake Sequence spartan6" xil_pn:value="false" xil_pn:valueState="default"/>
-    <property xil_pn:name="Drive Done Pin High" xil_pn:value="true" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Drive Done Pin High" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Enable BitStream Compression" xil_pn:value="false" xil_pn:valueState="default"/>
-    <property xil_pn:name="Enable Cyclic Redundancy Checking (CRC) spartan6" xil_pn:value="true" xil_pn:valueState="default"/>
+    <property xil_pn:name="Enable Cyclic Redundancy Checking (CRC) spartan6" xil_pn:value="false" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Enable Debugging of Serial Mode BitStream" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Enable External Master Clock spartan6" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Enable Hardware Co-Simulation" xil_pn:value="false" xil_pn:valueState="default"/>
@@ -270,7 +270,7 @@
     <property xil_pn:name="Incremental Compilation" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Insert Buffers to Prevent Pulse Swallowing" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Instantiation Template Target Language Xps" xil_pn:value="VHDL" xil_pn:valueState="default"/>
-    <property xil_pn:name="JTAG Pin TCK" xil_pn:value="Float" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="JTAG Pin TCK" xil_pn:value="Pull Down" xil_pn:valueState="non-default"/>
     <property xil_pn:name="JTAG Pin TDI" xil_pn:value="Pull Up" xil_pn:valueState="default"/>
     <property xil_pn:name="JTAG Pin TDO" xil_pn:value="Pull Up" xil_pn:valueState="default"/>
     <property xil_pn:name="JTAG Pin TMS" xil_pn:value="Pull Up" xil_pn:valueState="default"/>

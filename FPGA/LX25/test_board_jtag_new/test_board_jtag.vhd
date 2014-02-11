@@ -38,7 +38,7 @@ entity test_board_jtag is
     ID_G          : std_logic_vector := "00000001";  -- The ID this module responds to.
     BASE_FREQ_G   : real    := BASE_FREQ_C;    -- Base frequency in MHz.
     CLK_MUL_G     : natural := 25;      -- Multiplier for base frequency.
-    CLK_DIV_G     : natural := 3       -- Divider for base frequency.
+    CLK_DIV_G     : natural := 4      -- Divider for base frequency.
     );
   port(
     fpgaClk_i : in    std_logic;  -- Main clock input from external clock source.
