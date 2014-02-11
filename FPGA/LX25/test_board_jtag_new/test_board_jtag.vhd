@@ -22,34 +22,23 @@
 ----------------------------------------------------------------------------------
 
 
-library IEEE;
+library IEEE, XESS;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.numeric_std.all;
-use work.CommonPckg.all;
-use work.HostIoPckg.all;
-use work.TestBoardCorePckg.all;
-use work.ClkgenPckg.all;
-use work.SyncToClockPckg.all;
+use XESS.CommonPckg.all;
+use XESS.HostIoPckg.all;
+use XESS.TestBoardCorePckg.all;
+use XESS.ClkgenPckg.all;
+use XESS.SyncToClockPckg.all;
+use work.XessBoardPckg.all;
 
 
 entity test_board_jtag is
   generic(
     ID_G          : std_logic_vector := "00000001";  -- The ID this module responds to.
-    BASE_FREQ_G   : real    := 12.0;    -- Base frequency in MHz.
+    BASE_FREQ_G   : real    := BASE_FREQ_C;    -- Base frequency in MHz.
     CLK_MUL_G     : natural := 25;      -- Multiplier for base frequency.
-    CLK_DIV_G     : natural := 3;       -- Divider for base frequency.
-    PIPE_EN_G     : boolean := true;
-    DATA_WIDTH_G  : natural := 16;      -- Width of data.
-    HADDR_WIDTH_G : natural := 24;      -- Host-side address width.
-    SADDR_WIDTH_G : natural := 13;      -- SDRAM address bus width.
-    NROWS_G       : natural := 8192;    -- Number of rows in each SDRAM bank.
-    NCOLS_G       : natural := 512;     -- Number of words in each row.
-    -- Beginning and ending addresses for the entire SDRAM.
-    BEG_ADDR_G    : natural := 16#00_0000#;
-    END_ADDR_G    : natural := 16#FF_FFFF#;
-    -- Beginning and ending address for the memory tester.
-    BEG_TEST_G    : natural := 16#00_0000#;
-    END_TEST_G    : natural := 16#FF_FFFF#  -- Board will pass with this.
+    CLK_DIV_G     : natural := 3       -- Divider for base frequency.
     );
   port(
     fpgaClk_i : in    std_logic;  -- Main clock input from external clock source.
@@ -61,8 +50,8 @@ entity test_board_jtag is
     sdCas_bo  : out   std_logic;        -- SDRAM column address strobe.
     sdWe_bo   : out   std_logic;        -- SDRAM write enable.
     sdBs_o    : out   std_logic_vector(1 downto 0);  -- SDRAM bank address.
-    sdAddr_o  : out   std_logic_vector(SADDR_WIDTH_G-1 downto 0);  -- SDRAM row/column address.
-    sdData_io : inout std_logic_vector(DATA_WIDTH_G-1 downto 0);  -- Data to/from SDRAM.
+    sdAddr_o  : out   std_logic_vector(SDRAM_SADDR_WIDTH_C-1 downto 0);  -- SDRAM row/column address.
+    sdData_io : inout std_logic_vector(SDRAM_DATA_WIDTH_C-1 downto 0);  -- Data to/from SDRAM.
     sdDqmh_o  : out   std_logic;  -- Enable upper-byte of SDRAM databus if true.
     sdDqml_o  : out   std_logic  -- Enable lower-byte of SDRAM databus if true.
     );
@@ -70,7 +59,6 @@ end entity;
 
 
 architecture arch of test_board_jtag is
-
   constant FREQ_G : real := (BASE_FREQ_G * real(CLK_MUL_G)) / real(CLK_DIV_G);
   signal clk_s : std_logic;
   signal reset_s         : std_logic;
@@ -89,7 +77,7 @@ begin
   clk_s <= sdClkFb_i;  -- Main clock is SDRAM clock fed back into FPGA.
 
   u1 : HostIoToDut
-    generic map(SIMPLE_G => true, FPGA_DEVICE_G => SPARTAN6, ID_G => ID_G)
+    generic map(SIMPLE_G => true, ID_G => ID_G)
     port map(
       vectorFromDut_i => test_status_s,
       vectorToDut_o   => test_ctrl_s
@@ -109,15 +97,7 @@ begin
   u3 : TestBoardCore
     generic map(
       FREQ_G        => FREQ_G,
-      PIPE_EN_G     => PIPE_EN_G,
-      DATA_WIDTH_G  => DATA_WIDTH_G,
-      SADDR_WIDTH_G => SADDR_WIDTH_G,
-      NROWS_G       => NROWS_G,
-      NCOLS_G       => NCOLS_G,
-      BEG_ADDR_G    => BEG_ADDR_G,
-      END_ADDR_G    => END_ADDR_G,
-      BEG_TEST_G    => BEG_TEST_G,
-      END_TEST_G    => END_TEST_G
+      PIPE_EN_G     => true
       )
     port map(
       rst_i      => syncedReset_s,
