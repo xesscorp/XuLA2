@@ -1,22 +1,21 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    14:41:43 07/09/2011 
--- Design Name: 
--- Module Name:    blinker - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
+--**********************************************************************
+-- Copyright (c) 1997-2014 by XESS Corp <http://www.xess.com>.
+-- All rights reserved.
 --
--- Dependencies: 
+-- This program is free software: you can redistribute it and/or modify
+-- it under the terms of the GNU General Public License as published by
+-- the Free Software Foundation, either version 3 of the License, or
+-- (at your option) any later version.
 --
--- Revision: 
--- Revision 0.01 - File Created
--- Additional Comments: 
+-- This program is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-- GNU General Public License for more details.
 --
-----------------------------------------------------------------------------------
+-- You should have received a copy of the GNU General Public License
+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+--**********************************************************************
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;

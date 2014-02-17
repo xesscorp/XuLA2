@@ -35,10 +35,10 @@ use work.XessBoardPckg.all;
 
 entity test_board_jtag is
   generic(
-    ID_G          : std_logic_vector := "00000001";  -- The ID this module responds to.
-    BASE_FREQ_G   : real    := BASE_FREQ_C;    -- Base frequency in MHz.
-    CLK_MUL_G     : natural := 25;      -- Multiplier for base frequency.
-    CLK_DIV_G     : natural := 4      -- Divider for base frequency.
+    ID_G        : std_logic_vector := "00000001";  -- The ID this module responds to.
+    BASE_FREQ_G : real             := BASE_FREQ_C;   -- Base frequency in MHz.
+    CLK_MUL_G   : natural          := 25;  -- Multiplier for base frequency.
+    CLK_DIV_G   : natural          := 3    -- Divider for base frequency.
     );
   port(
     fpgaClk_i : in    std_logic;  -- Main clock input from external clock source.
@@ -59,14 +59,14 @@ end entity;
 
 
 architecture arch of test_board_jtag is
-  constant FREQ_G : real := (BASE_FREQ_G * real(CLK_MUL_G)) / real(CLK_DIV_G);
-  signal clk_s : std_logic;
+  constant FREQ_C        : real                          := (BASE_FREQ_G * real(CLK_MUL_G)) / real(CLK_DIV_G);
+  constant SIGNATURE_C   : std_logic_vector(31 downto 0) := x"A50001A5";
+  signal clk_s           : std_logic;
   signal reset_s         : std_logic;
   signal syncedReset_s   : std_logic;
   signal test_ctrl_s     : std_logic_vector(0 downto 0);
   signal test_progress_s : std_logic_vector(1 downto 0);  -- Progress of the test.
   signal test_failed_s   : std_logic;  -- True if an error was found during the test.
-  signal signature_s     : std_logic_vector(31 downto 0) := x"A50001A5";
   signal test_status_s   : std_logic_vector(34 downto 0);
 begin
 
@@ -83,10 +83,10 @@ begin
       vectorToDut_o   => test_ctrl_s
       );
   reset_s       <= test_ctrl_s(0);
-  test_status_s <= signature_s & test_failed_s & test_progress_s;
+  test_status_s <= SIGNATURE_C & test_failed_s & test_progress_s;
 
   -- Sync reset signal from HostIoToDut to TestBoardCore.      
-  u2: SyncToClock
+  u2 : SyncToClock
     port map (
       clk_i      => clk_s,
       unsynced_i => reset_s,
@@ -96,8 +96,8 @@ begin
   -- Board diagnostic unit.
   u3 : TestBoardCore
     generic map(
-      FREQ_G        => FREQ_G,
-      PIPE_EN_G     => true
+      FREQ_G    => FREQ_C,
+      PIPE_EN_G => true
       )
     port map(
       rst_i      => syncedReset_s,
@@ -107,14 +107,14 @@ begin
       err_o      => test_failed_s,
       sdCke_o    => sdCke_o,
       sdCe_bo    => sdCe_bo,
-      sdRas_bo   => sdRas_bo,           -- SDRAM RAS
-      sdCas_bo   => sdCas_bo,           -- SDRAM CAS
-      sdWe_bo    => sdWe_bo,            -- SDRAM write-enable
-      sdBs_o     => sdBs_o,             -- SDRAM bank address
-      sdAddr_o   => sdAddr_o,           -- SDRAM address
-      sdData_io  => sdData_io,          -- data to/from SDRAM
-      sdDqmh_o   => sdDqmh_o,   -- upper-byte enable for SDRAM data bus.
-      sdDqml_o   => sdDqml_o    -- lower-byte enable for SDRAM data bus.
+      sdRas_bo   => sdRas_bo,
+      sdCas_bo   => sdCas_bo,
+      sdWe_bo    => sdWe_bo,
+      sdBs_o     => sdBs_o,
+      sdAddr_o   => sdAddr_o,
+      sdData_io  => sdData_io,
+      sdDqmh_o   => sdDqmh_o,
+      sdDqml_o   => sdDqml_o
       );
 
 end architecture;

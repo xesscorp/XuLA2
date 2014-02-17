@@ -15,32 +15,131 @@
   <version xil_pn:ise_version="13.4" xil_pn:schema_version="2"/>
 
   <files>
-    <file xil_pn:name="../../XuLA_lib/ClkGen.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="1"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
-    </file>
-    <file xil_pn:name="../../XuLA_lib/Common.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="2"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="2"/>
-    </file>
-    <file xil_pn:name="../../XuLA_lib/SdramCntl.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="3"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="3"/>
-    </file>
     <file xil_pn:name="ramintfc_jtag.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="6"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/audio.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="58"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/buttonDebouncer.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="59"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/ButtonScanner.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="60"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/ClkGen.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="61"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="3"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/Common.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="62"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="1"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/fifo.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="63"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/FlashCntl.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="64"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/hcsr04.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="65"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/HostIo.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="66"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="6"/>
+      <library xil_pn:name="XESS"/>
     </file>
-    <file xil_pn:name="../../XuLA_lib/HostIo.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="7"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="4"/>
+    <file xil_pn:name="../../../../VHDL_Lib/HostIoToI2c.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="67"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
     </file>
-    <file xil_pn:name="../../XuLA_lib/XuLA2.ucf" xil_pn:type="FILE_UCF">
+    <file xil_pn:name="../../../../VHDL_Lib/HostIoToSpi.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="68"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/I2c.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="69"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/LedDigits.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="70"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/MemTest.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="71"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/pwm.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="72"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/RandGen.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="73"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/RotaryEncoder.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="74"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/SDCard.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="75"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/SdramCntl.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="76"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/Spi.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="77"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/SyncToClk.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="78"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="2"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/TestBoardCore.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="79"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/Vga.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="80"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+      <library xil_pn:name="XESS"/>
+    </file>
+    <file xil_pn:name="../../../../VHDL_Lib/Board_Packages/XuLA2.ucf" xil_pn:type="FILE_UCF">
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
-    <file xil_pn:name="../../XuLA_lib/SyncToClk.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="9"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="1"/>
+    <file xil_pn:name="../../../../VHDL_Lib/Board_Packages/XuLA2.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="82"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="4"/>
     </file>
   </files>
 
@@ -389,7 +488,9 @@
 
   <bindings/>
 
-  <libraries/>
+  <libraries>
+    <library xil_pn:name="XESS"/>
+  </libraries>
 
   <autoManagedFiles>
     <!-- The following files are identified by `include statements in verilog -->

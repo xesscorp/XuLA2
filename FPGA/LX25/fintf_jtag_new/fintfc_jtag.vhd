@@ -19,18 +19,22 @@
 -- Serial flash upload/download via JTAG.
 --**********************************************************************
 
-
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
-use ieee.math_real.all;
-use work.CommonPckg.all;
-use work.ClkGenPckg.all;
-use work.HostIoToSpiPckg.all;
+library IEEE, XESS;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use IEEE.math_real.all;
+use XESS.CommonPckg.all;
+use XESS.ClkGenPckg.all;
+use XESS.HostIoToSpiPckg.all;
+use work.XessBoardPckg.all;
 
 entity fintf_jtag is
   generic (
-    ID_G : std_logic_vector := "00000010"  -- The ID this module responds to.
+    ID_G        : std_logic_vector := "00000010";  -- The ID this module responds to.
+    BASE_FREQ_G : real             := BASE_FREQ_C;  -- Base frequency in MHz.
+    CLK_MUL_G   : natural          := 25;  -- Multiplier for base frequency.
+    CLK_DIV_G   : natural          := 3;   -- Divider for base frequency.
+    SPI_FREQ_G  : real             := 25.0 -- SPI frequency for SD card interface.
     );
   port (
     fpgaClk_i  : in  std_logic;         -- XuLA 12 MHz clock.
@@ -42,12 +46,15 @@ entity fintf_jtag is
 end entity;
 
 architecture arch of fintf_jtag is
-  signal clk_s   : std_logic;           -- Clock.
-  signal reset_s : std_logic := LO;     -- Active-high reset.
+  constant FREQ_C : real      := (BASE_FREQ_G * real(CLK_MUL_G)) / real(CLK_DIV_G);
+  signal clk_s    : std_logic;          -- Clock.
+  signal reset_s  : std_logic := LO;    -- Active-high reset.
 begin
 
   -- Generate 100 MHz clock from 12 MHz XuLA clock.
-  u0 : ClkGen generic map(CLK_MUL_G => 25, CLK_DIV_G => 3) port map(i => fpgaClk_i, o => clk_s);
+  u0 : ClkGen
+    generic map(CLK_MUL_G => CLK_MUL_G, CLK_DIV_G => CLK_DIV_G)
+    port map(i            => fpgaClk_i, o => clk_s);
 
   -- Generate a reset pulse to initialize the modules.
   process (clk_s)
@@ -66,8 +73,8 @@ begin
   -- Instantiate the JTAG-to-SPI interface.
   u1 : HostIoToSpi
     generic map(
-      FREQ_G        => 100.0,
-      SPI_FREQ_G    => 25.0,
+      FREQ_G        => FREQ_C,
+      SPI_FREQ_G    => SPI_FREQ_G,
       DATA_LENGTH_G => 8,
       CPOL_G        => LO,
       CPHA_G        => HI,

@@ -21,10 +21,10 @@
 --    Miscellaneous constants and functions for USER JTAG instructions.
 --------------------------------------------------------------------
 
-library IEEE;
+library IEEE, XESS;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-use work.CommonPckg.all;
+use XESS.CommonPckg.all;
 
 package UserInstrJtagPckg is
 
@@ -161,11 +161,11 @@ end package;
 --                  sequentially from the starting address.
 --------------------------------------------------------------------
 
-library IEEE;
+library IEEE, XESS;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.STD_LOGIC_ARITH.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
-use work.CommonPckg.all;
+use XESS.CommonPckg.all;
 use work.UserInstrJtagPckg.all;
 
 library UNISIM;

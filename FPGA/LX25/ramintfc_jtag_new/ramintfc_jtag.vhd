@@ -23,28 +23,23 @@
 --------------------------------------------------------------------
 
 
-library IEEE;
+library IEEE, XESS;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.numeric_std.all;
-use work.CommonPckg.all;
-use work.HostIoPckg.all;
-use work.SdramCntlPckg.all;
-use work.ClkgenPckg.all;
-use work.SyncToClockPckg.all;
-
+use XESS.CommonPckg.all;
+use XESS.HostIoPckg.all;
+use XESS.SdramCntlPckg.all;
+use XESS.ClkgenPckg.all;
+use XESS.SyncToClockPckg.all;
+use work.XessBoardPckg.all;
 
 entity ramintfc_jtag is
   generic(
     ID_G          : std_logic_vector := "00000011";  -- The ID this module responds to.
-    BASE_FREQ_G   : real    := 12.0;    -- Base frequency in MHz.
+    BASE_FREQ_G   : real    := BASE_FREQ_C;
     CLK_MUL_G     : natural := 25;      -- Multiplier for base frequency.
     CLK_DIV_G     : natural := 3;       -- Divider for base frequency.
-    PIPE_EN_G     : boolean := false;
-    DATA_WIDTH_G  : natural := 16;      -- Width of data.
-    HADDR_WIDTH_G : natural := 32;      -- Host-side address width.
-    SADDR_WIDTH_G : natural := 13;      -- SDRAM address bus width.
-    NROWS_G       : natural := 8192;    -- Number of rows in each SDRAM bank.
-    NCOLS_G       : natural := 512      -- Number of words in each row.
+    PIPE_EN_G     : boolean := false
     );
   port(
     fpgaClk_i : in    std_logic;  -- Main clock input from external clock source.
@@ -56,8 +51,8 @@ entity ramintfc_jtag is
     sdCas_bo  : out   std_logic;        -- SDRAM column address strobe.
     sdWe_bo   : out   std_logic;        -- SDRAM write enable.
     sdBs_o    : out   std_logic_vector(1 downto 0);  -- SDRAM bank address.
-    sdAddr_o  : out   std_logic_vector(SADDR_WIDTH_G-1 downto 0);  -- SDRAM row/column address.
-    sdData_io : inout std_logic_vector(DATA_WIDTH_G-1 downto 0);  -- Data to/from SDRAM.
+    sdAddr_o  : out   std_logic_vector(SDRAM_SADDR_WIDTH_C-1 downto 0);  -- SDRAM row/column address.
+    sdData_io : inout std_logic_vector(SDRAM_DATA_WIDTH_C-1 downto 0);  -- Data to/from SDRAM.
     sdDqmh_o  : out   std_logic;  -- Enable upper-byte of SDRAM databus if true.
     sdDqml_o  : out   std_logic  -- Enable lower-byte of SDRAM databus if true.
     );
@@ -66,7 +61,7 @@ end entity;
 
 architecture arch of ramintfc_jtag is
 
-  constant FREQ_G : real      := (BASE_FREQ_G * real(CLK_MUL_G)) / real(CLK_DIV_G);
+  constant FREQ_G : real      := (BASE_FREQ_C * real(CLK_MUL_G)) / real(CLK_DIV_G);
   signal clk_s    : std_logic;
   signal reset_s  : std_logic := YES;
 
@@ -75,9 +70,9 @@ architecture arch of ramintfc_jtag is
   signal wr_s           : std_logic;    -- host write enable
   signal earlyOpBegun_s : std_logic;  -- true when current read/write has begun.
   signal done_s         : std_logic;    -- true when current read/write is done
-  signal addr_s         : std_logic_vector(HADDR_WIDTH_G-1 downto 0);  -- host address
-  signal dataToRam_s    : std_logic_vector(DATA_WIDTH_G-1 downto 0);  -- data input from host
-  signal dataFromRam_s  : std_logic_vector(DATA_WIDTH_G-1 downto 0);  -- host data output to host
+  signal addr_s         : std_logic_vector(SDRAM_HADDR_WIDTH_C-1 downto 0);  -- host address
+  signal dataToRam_s    : std_logic_vector(SDRAM_DATA_WIDTH_C-1 downto 0);  -- data input from host
+  signal dataFromRam_s  : std_logic_vector(SDRAM_DATA_WIDTH_C-1 downto 0);  -- host data output to host
   
 begin
 
@@ -104,7 +99,6 @@ begin
 
   u3 : HostIoToRam
     generic map(
-      FPGA_DEVICE_G => SPARTAN6,
       ID_G     => ID_G,   -- The ID this module responds to.
       SIMPLE_G => true,  -- If true, include BscanToHostIo module in this module.
       SYNC_G   => true  -- If true, sync this module with the FPGA app. logic clock domain.
@@ -126,14 +120,8 @@ begin
   u4 : SdramCntl
     generic map(
       FREQ_G        => FREQ_G,
-      IN_PHASE_G    => true,
       PIPE_EN_G     => PIPE_EN_G,
-      MAX_NOP_G     => 10000,
-      NROWS_G       => NROWS_G,
-      NCOLS_G       => NCOLS_G,
-      HADDR_WIDTH_G => HADDR_WIDTH_G,
-      SADDR_WIDTH_G => SADDR_WIDTH_G,
-      DATA_WIDTH_G  => DATA_WIDTH_G
+      MAX_NOP_G     => 10000
       )
     port map(
       clk_i          => clk_s,  -- master clock from external clock source (unbuffered)
