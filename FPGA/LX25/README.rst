@@ -1,8 +1,10 @@
 ==========================================
-XuLA-200 FPGA Design Examples
+XuLA2 FPGA Design Examples
 ==========================================
 
-Each of these directories contains a complete Xilinx ISE WebPACK 13 design project for the XuLA-200 board.
+Each of these directories contains a complete Xilinx ISE WebPACK 13 design project for the XuLA2-LX25 board.
+(It's easy to re-target these to the XuLA2-LX9 board: just select **Project => Design Properties..." and change
+the **Device** field to ``XC6SLX9``.)
 
     blinker/:
         A simple LED blinker design from chapter 4 of the book "FPGAs!? Now What?".
@@ -22,7 +24,7 @@ Each of these directories contains a complete Xilinx ISE WebPACK 13 design proje
         serial flash configuration memory on the XuLA board.
 
     fintf_jtag_new/:
-        This design is used by xsload.py when it needs to read or write the contents of the
+        This design is used by the Python version of XSLOAD when it needs to read or write the contents of the
         serial flash configuration memory on the XuLA board.
 
     hcsr04_test/:
@@ -35,9 +37,6 @@ Each of these directories contains a complete Xilinx ISE WebPACK 13 design proje
     HostIoToI2c:
         This design allows a host PC to talk to an I2C peripheral.
 		
-	LedDigitsWings/:
-		A design that uses three StickIt! LED Modules for testing the wing connectors on the StickIt! motherboard.
-
     ramintfc_jtag/:
         This design is used by GXSLOAD when it needs to read or write the contents of the
         SDRAM on the XuLA board.
