@@ -12,8 +12,8 @@ the **Device** field to ``XC6SLX9``.)
     counter/:
         A simple 26-bit counter that is driven by a 100 MHz clock and whose bits are output
         throuogh the prototyping header. This is a good design to check the functioning of
-        the XuLA board. *Check the setting for the startup-clock - either JTAGCLK or CCLK -
-        to make sure it complies with how you are using the XuLA board - either USB-connected
+        the XuLA2 board. *Check the setting for the startup-clock - either JTAGCLK or CCLK -
+        to make sure it complies with how you are using the XuLA2 board - either USB-connected
         or standalone.*
 
     fast_blinker/:
@@ -21,11 +21,11 @@ the **Device** field to ``XC6SLX9``.)
 
     fintf_jtag/:
         This design is used by GXSLOAD when it needs to read or write the contents of the
-        serial flash configuration memory on the XuLA board.
+        serial flash configuration memory on the XuLA2 board.
 
     fintf_jtag_new/:
         This design is used by the Python version of XSLOAD when it needs to read or write the contents of the
-        serial flash configuration memory on the XuLA board.
+        serial flash configuration memory on the XuLA2 board.
 
     hcsr04_test/:
         A simple interface to test an HCSR04 ultrasonic distance measurement module.
@@ -39,11 +39,11 @@ the **Device** field to ``XC6SLX9``.)
 		
     ramintfc_jtag/:
         This design is used by GXSLOAD when it needs to read or write the contents of the
-        SDRAM on the XuLA board.
+        SDRAM on the XuLA2 board.
 
     ramintfc_jtag_new/:
-        This design is used by xsload.py when it needs to read or write the contents of the
-        SDRAM on the XuLA board.
+        This design is used by Python version of XSLOAD when it needs to read or write the contents of the
+        SDRAM on the XuLA2 board.
 
     rand_test/:
         This design uses the hostio module to gather samples from the random-number generator module.
@@ -57,7 +57,7 @@ the **Device** field to ``XC6SLX9``.)
         through the JTAG and USB links.
 
     test_board_jtag_new/:
-        This design is used by xstest.py to test the SDRAM and report the success or failure
+        This design is used by Python version of XSTEST to test the SDRAM and report the success or failure
         through the JTAG and USB links.
 
 =back
