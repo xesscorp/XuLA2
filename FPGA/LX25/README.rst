@@ -2,9 +2,7 @@
 XuLA2 FPGA Design Examples
 ==========================================
 
-Each of these directories contains a complete Xilinx ISE WebPACK 13 design project for the XuLA2-LX25 board.
-(It's easy to re-target these to the XuLA2-LX9 board: just select **Project => Design Properties...** and change
-the **Device** field to ``XC6SLX9``.)
+Each of these directories contains a complete Xilinx ISE design project for the XuLA2-LX25 board.
 
     blinker/:
         A simple LED blinker design from chapter 4 of the book "FPGAs!? Now What?".
@@ -24,8 +22,8 @@ the **Device** field to ``XC6SLX9``.)
         serial flash configuration memory on the XuLA2 board.
 
     fintf_jtag_new/:
-        This design is used by the Python version of XSLOAD when it needs to read or write the contents of the
-        serial flash configuration memory on the XuLA2 board.
+        This design is used by the Python version of XSLOAD when it needs to read or write 
+        the contents of the serial flash configuration memory on the XuLA2 board.
 
     hcsr04_test/:
         A simple interface to test an HCSR04 ultrasonic distance measurement module.
@@ -42,8 +40,8 @@ the **Device** field to ``XC6SLX9``.)
         SDRAM on the XuLA2 board.
 
     ramintfc_jtag_new/:
-        This design is used by Python version of XSLOAD when it needs to read or write the contents of the
-        SDRAM on the XuLA2 board.
+        This design is used by the Python version of XSLOAD when it needs to read or write 
+        the contents of the SDRAM on the XuLA2 board.
 
     rand_test/:
         This design uses the hostio module to gather samples from the random-number generator module.
@@ -57,7 +55,7 @@ the **Device** field to ``XC6SLX9``.)
         through the JTAG and USB links.
 
     test_board_jtag_new/:
-        This design is used by Python version of XSTEST to test the SDRAM and report the success or failure
-        through the JTAG and USB links.
+        This design is used by the Python version of XSTEST to test the SDRAM and report 
+        the success or failure through the JTAG and USB links.
 
 

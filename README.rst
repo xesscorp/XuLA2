@@ -23,6 +23,8 @@ This repo integrates everything for the XuLA2 FPGA board into one place:
                 
     FPGA/:
         All the example FPGA designs for the XuLA2 are stored in here.
+        (You can find others in the StickIt! repository under the subdirectories
+        for the modules they support.)
         
     docs/:
         Look in here for the source of the XuLA2 manual and other supporting documentation.

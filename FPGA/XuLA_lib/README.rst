@@ -3,6 +3,8 @@ XuLA2 Library Files
 ========================================
 
 These are HDL files for modules that are useful in a variety of larger designs.
+(These modules are retained for some legacy projects, but have been superseded by those 
+in the VHDL_Lib repository.)
 
     Audio:
         An interface to an AK4565 audio codec for sampling and generating
