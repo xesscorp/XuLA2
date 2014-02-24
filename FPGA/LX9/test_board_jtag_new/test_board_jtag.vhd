@@ -37,6 +37,7 @@ entity test_board_jtag is
   generic(
     ID_G        : std_logic_vector := "00000001";  -- The ID this module responds to.
     BASE_FREQ_G : real             := BASE_FREQ_C;   -- Base frequency in MHz.
+    -- Using a MUL/DIV of 25/6 causes the diagnostic to fail for an unknown reason.
     CLK_MUL_G   : natural          := 25;  -- Multiplier for base frequency.
     CLK_DIV_G   : natural          := 3    -- Divider for base frequency.
     );

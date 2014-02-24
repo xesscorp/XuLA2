@@ -36,6 +36,7 @@ use UNISIM.VComponents.all;
 entity test_board_jtag is
   generic(
     BASE_FREQ_G   : real    := 12.0;    -- base frequency in MHz
+    -- Using a MUL/DIV of 25/6 causes the diagnostic to fail for an unknown reason.
     CLK_MUL_G     : natural := 25;      -- multiplier for base frequency
     CLK_DIV_G     : natural := 3;       -- divider for base frequency
     PIPE_EN_G     : boolean := true;
