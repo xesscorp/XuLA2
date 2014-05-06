@@ -19,7 +19,6 @@
 
 ----------------------------------------------------------------------------------
 -- SDRAM/RAM upload/download via JTAG.
--- See userinstr_jtag.vhd for details of operation.
 --------------------------------------------------------------------
 
 
@@ -30,7 +29,6 @@ use XESS.CommonPckg.all;
 use XESS.HostIoPckg.all;
 use XESS.SdramCntlPckg.all;
 use XESS.ClkgenPckg.all;
-use XESS.SyncToClockPckg.all;
 use work.XessBoardPckg.all;
 
 entity ramintfc_jtag is
@@ -68,7 +66,7 @@ architecture arch of ramintfc_jtag is
   -- signals to/from the SDRAM controller
   signal rd_s           : std_logic;    -- host read enable
   signal wr_s           : std_logic;    -- host write enable
-  signal earlyOpBegun_s : std_logic;  -- true when current read/write has begun.
+  signal opBegun_s      : std_logic;  -- true when current read/write has begun.
   signal done_s         : std_logic;    -- true when current read/write is done
   signal addr_s         : std_logic_vector(SDRAM_HADDR_WIDTH_C-1 downto 0);  -- host address
   signal dataToRam_s    : std_logic_vector(SDRAM_DATA_WIDTH_C-1 downto 0);  -- data input from host
@@ -112,7 +110,7 @@ begin
       dataFromHost_o => dataToRam_s,    -- Data written to memory.
       rd_o           => rd_s,           -- Read data from memory when high.
       dataToHost_i   => dataFromRam_s,  -- Data read from memory.
-      opBegun_i      => earlyOpBegun_s, -- True when R/W operation has initiated.
+      opBegun_i      => opBegun_s, -- True when R/W operation has initiated.
       done_i         => done_s  -- True when memory read/write operation is done.
       );
 
@@ -120,8 +118,7 @@ begin
   u4 : SdramCntl
     generic map(
       FREQ_G        => FREQ_G,
-      PIPE_EN_G     => PIPE_EN_G,
-      MAX_NOP_G     => 10000
+      PIPE_EN_G     => PIPE_EN_G
       )
     port map(
       clk_i          => clk_s,  -- master clock from external clock source (unbuffered)
@@ -129,8 +126,8 @@ begin
       rst_i          => reset_s,        -- reset
       rd_i           => rd_s,  -- host-side SDRAM read control from memory tester
       wr_i           => wr_s,  -- host-side SDRAM write control from memory tester
+      opBegun_o      => opBegun_s,  -- SDRAM memory read/write begun indicator
       done_o         => done_s,  -- SDRAM memory read/write done indicator
-      earlyOpBegun_o => earlyOpBegun_s,  -- SDRAM memory read/write done indicator
       addr_i         => addr_s,  -- host-side address from memory tester to SDRAM
       data_i         => dataToRam_s,  -- test data pattern from memory tester to SDRAM
       data_o         => dataFromRam_s,  -- SDRAM data output to memory tester

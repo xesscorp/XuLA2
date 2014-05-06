@@ -217,8 +217,8 @@
     <property xil_pn:name="Enable Suspend/Wake Global Set/Reset spartan6" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Encrypt Bitstream spartan6" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Encrypt Key Select spartan6" xil_pn:value="BBRAM" xil_pn:valueState="default"/>
-    <property xil_pn:name="Equivalent Register Removal Map" xil_pn:value="true" xil_pn:valueState="default"/>
-    <property xil_pn:name="Equivalent Register Removal XST" xil_pn:value="true" xil_pn:valueState="default"/>
+    <property xil_pn:name="Equivalent Register Removal Map" xil_pn:value="false" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Equivalent Register Removal XST" xil_pn:value="false" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Essential Bits" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Evaluation Development Board" xil_pn:value="None Specified" xil_pn:valueState="default"/>
     <property xil_pn:name="Exclude Compilation of Deprecated EDK Cores" xil_pn:value="true" xil_pn:valueState="default"/>
@@ -253,7 +253,7 @@
     <property xil_pn:name="Generate Timegroups Section Post Trace" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Generics, Parameters" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Global Optimization Goal" xil_pn:value="AllClockNets" xil_pn:valueState="default"/>
-    <property xil_pn:name="Global Optimization map spartan6" xil_pn:value="Off" xil_pn:valueState="default"/>
+    <property xil_pn:name="Global Optimization map spartan6" xil_pn:value="Speed" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Global Set/Reset Port Name" xil_pn:value="GSR_PORT" xil_pn:valueState="default"/>
     <property xil_pn:name="Global Tristate Port Name" xil_pn:value="GTS_PORT" xil_pn:valueState="default"/>
     <property xil_pn:name="Hierarchy Separator" xil_pn:value="/" xil_pn:valueState="default"/>
@@ -368,7 +368,7 @@
     <property xil_pn:name="Regenerate Core" xil_pn:value="Under Current Project Setting" xil_pn:valueState="default"/>
     <property xil_pn:name="Register Balancing" xil_pn:value="No" xil_pn:valueState="default"/>
     <property xil_pn:name="Register Duplication Map" xil_pn:value="Off" xil_pn:valueState="default"/>
-    <property xil_pn:name="Register Duplication Xst" xil_pn:value="true" xil_pn:valueState="default"/>
+    <property xil_pn:name="Register Duplication Xst" xil_pn:value="false" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Register Ordering spartan6" xil_pn:value="4" xil_pn:valueState="default"/>
     <property xil_pn:name="Release Write Enable (Output Events)" xil_pn:value="Default (6)" xil_pn:valueState="default"/>
     <property xil_pn:name="Rename Design Instance in Testbench File to" xil_pn:value="UUT" xil_pn:valueState="default"/>
