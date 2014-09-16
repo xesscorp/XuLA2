@@ -21,9 +21,9 @@
 #define VERSION_H
 
 #define MAJOR_VERSION       1
-#define MINOR_VERSION       1
-#define USB_FMW_VERSION     0x0101
+#define MINOR_VERSION       3
+#define USB_FMW_VERSION     0x0103
 
-#define PRODUCT_ID          0x00,0x02
+#define PRODUCT_ID          0x00,0x04
 
 #endif
