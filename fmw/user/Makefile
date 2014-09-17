@@ -44,4 +44,5 @@ total : _output/XuLA_jtag.cof ../boot/_output/XuLA_boot.hex
 	head --lines=-1 ../boot/_output/XuLA_boot.hex > _output/XuLA_total.hex
 	mp2hex /r 0x000800-0xFFFFFF _output/XuLA_jtag.cof
 	cat _output/XuLA_jtag.hex >> _output/XuLA_total.hex
+    echo "Remove one of the config bits sections from the final hex file!!!"
 
