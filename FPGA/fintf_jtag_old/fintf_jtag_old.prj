@@ -1,0 +1,6 @@
+vhdl XESS "../../../VHDL_Lib/Common.vhd"
+vhdl XESS "../../../VHDL_Lib/UserInstrJtag.vhd"
+vhdl XESS "../../../VHDL_Lib/FlashCntl.vhd"
+vhdl XESS "../../../VHDL_Lib/ClkGen.vhd"
+vhdl work "../../../VHDL_Lib/Board_Packages/XuLA2.vhd"
+vhdl work "fintf_jtag_old.vhd"

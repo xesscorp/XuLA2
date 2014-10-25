@@ -1,0 +1,7 @@
+vhdl XESS "../../../VHDL_Lib/Common.vhd"
+vhdl XESS "../../../VHDL_Lib/SyncToClk.vhd"
+vhdl XESS "../../../VHDL_Lib/ClkGen.vhd"
+vhdl work "../../../VHDL_Lib/Board_Packages/XuLA2.vhd"
+vhdl XESS "../../../VHDL_Lib/I2c.vhd"
+vhdl XESS "../../../VHDL_Lib/HostIo.vhd"
+vhdl XESS "../../../VHDL_Lib/HostIoToI2c.vhd"

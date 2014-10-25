@@ -1,50 +1,22 @@
-objects := 50 200
+projects := AdcSampler blinker counter fast_blinker \
+			hcsr04_test hostio_test HostIoCommTest HostIoToI2cTest \
+			rand_test RGBLed SdcardCtrlTest SdcardSfwTest \
+			test_board_jtag ramintfc_jtag fintf_jtag \
+			test_board_jtag_old ramintfc_jtag_old fintf_jtag_old
 
-all             : cfg
-cfg             : $(objects:=.cfg)
-config          : $(objects:=.config)
-exo             : $(objects:=.exo)
-timing          : $(objects:=.timing)
-clean           : $(objects:=.clean)
-distclean       : $(objects:=.distclean)
-maintainer-clean: $(objects:=.maintainer-clean)
-nice            : $(objects:=.nice) XULA_LIB.nice
+xstools_projects := fintf_jtag ramintfc_jtag test_board_jtag
 
-$(objects:=.cfg):
-	$(MAKE) -C $(subst .cfg,,$@) cfg
+old_xstools_projects := fintf_jtag_old ramintfc_jtag_old test_board_jtag_old
 
-$(objects:=.config):
-	$(MAKE) -C $(subst .config,,$@) config
+all         : $(projects:=.all)
+xstools     : $(xstools_projects:=.all)
+old_xstools : $(old_xstools_projects:=.all)
+clean       : $(projects:=.clean)
 
-$(objects:=.exo):
-	$(MAKE) -C $(subst .exo,,$@) exo
+%.all:
+	echo $@
+	$(MAKE) -C $(subst .all,,$@) all
 
-$(objects:=.timing):
-	$(MAKE) -C $(subst .timing,,$@) timing
-
-$(objects:=.clean):
+%.clean:
+	echo $@
 	$(MAKE) -C $(subst .clean,,$@) clean
-
-$(objects:=.distclean):
-	$(MAKE) -C $(subst .distclean,,$@) distclean
-
-$(objects:=.maintainer-clean):
-	$(MAKE) -C $(subst .maintainer-clean,,$@) maintainer-clean
-
-$(objects:=.nice) XULA_LIB.nice:
-	$(MAKE) -C $(subst .nice,,$@) nice
-
-.PHONY: design_files
-design_files:
-	perl make_files.pl > files.txt
-	tar -c -f tmp.tar -T files.txt
-	erase files.txt
-	-rmdir /s /q design_files
-	-mkdir design_files
-	tar -C design_files -x -f tmp.tar
-	erase tmp.tar
-	pod2text -l readme.pod > design_files\readme.txt
-	pod2html readme.pod > design_files\readme.html 
-	erase pod2htm*.tmp
-	echo "*** Now run Winzip on the design_files directory ***"
-

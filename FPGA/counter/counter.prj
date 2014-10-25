@@ -1,0 +1,3 @@
+vhdl XESS "../../../VHDL_Lib/Common.vhd"
+vhdl XESS "../../../VHDL_Lib/ClkGen.vhd"
+vhdl work "counter.vhd"

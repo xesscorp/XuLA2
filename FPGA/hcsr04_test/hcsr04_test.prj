@@ -1,0 +1,4 @@
+vhdl XESS "../../../VHDL_Lib/Common.vhd"
+vhdl XESS "../../../VHDL_Lib/LedDigits.vhd"
+vhdl work "../../../VHDL_Lib/Board_Packages/XuLA2.vhd"
+vhdl XESS "../../../VHDL_Lib/hcsr04.vhd"

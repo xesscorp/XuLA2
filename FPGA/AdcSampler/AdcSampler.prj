@@ -1,0 +1,8 @@
+vhdl XESS "../../../VHDL_Lib/Common.vhd"
+vhdl XESS "../../../VHDL_Lib/SyncToClk.vhd"
+vhdl XESS "../../../VHDL_Lib/ClkGen.vhd"
+vhdl work "../../../VHDL_Lib/Board_Packages/XuLA2.vhd"
+vhdl XESS "../../../VHDL_Lib/SdramCntl.vhd"
+vhdl XESS "../../../VHDL_Lib/HostIo.vhd"
+vhdl XESS "../../../VHDL_Lib/Misc.vhd"
+vhdl work "AdcSampler.vhd"
