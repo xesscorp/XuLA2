@@ -1,4 +1,0 @@
-net fpgaClk_i loc=a9 | IOSTANDARD = LVTTL;
-net scl_io    loc=m2 | IOSTANDARD = LVTTL;
-net sda_io    loc=m15 | IOSTANDARD = LVTTL;
-
