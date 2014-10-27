@@ -10,13 +10,16 @@ old_xstools_projects := fintf_jtag_old ramintfc_jtag_old test_board_jtag_old
 
 all         : $(projects:=.all)
 xstools     : $(xstools_projects:=.all)
+xstools-dist: DIST_DIR := ../../xstools/xstools/xula2
+xstools-dist: xstools $(xstools_projects:=.dist)
 old_xstools : $(old_xstools_projects:=.all)
 clean       : $(projects:=.clean)
 
 %.all:
-	echo $@
 	$(MAKE) -C $(subst .all,,$@) all
+    
+%.dist:
+	cp $(subst .dist,,$@)/*.bit $(DIST_DIR) 
 
 %.clean:
-	echo $@
 	$(MAKE) -C $(subst .clean,,$@) clean
