@@ -1,0 +1,1 @@
+net fpgaClk_i     loc=a9;  # 12 MHz input clock.

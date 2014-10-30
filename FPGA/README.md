@@ -52,6 +52,13 @@ FPGA Design Example Directories
     the XuLA2 board. *Check the setting for the startup-clock - either JTAGCLK or CCLK -
     to make sure it complies with how you are using the XuLA2 board - either USB-connected
     or standalone.*
+    
+`EchoTest`:
+    A simple design where the FPGA uses the HostIo communication module to receive
+    characters from a PC and then echoes them back.
+    
+`EchoTestVerilog`:
+    The same design as `EchoTest` except the top-level module is written in Verilog.
 
 `fast_blinker`:
     The LED blinker design sped-up by using a DCM from chapter 5 of the book "FPGAs!? Now What?".
