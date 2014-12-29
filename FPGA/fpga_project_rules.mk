@@ -1,8 +1,14 @@
+ifeq ($(shell uname),Linux)
+  MKDIR:=mkdir
+else
+  MKDIR:=gmkdir
+endif
+
 $(PROJECT).vhd:
 	echo $(PROJECT)
 
 $(PROJECT)_$(BRD).ngc: $(PROJECT).vhd
-	gmkdir -p xst/projnav.tmp/
+	$(MKDIR) -p xst/projnav.tmp/
 	xst -intstyle ise -ifn $(PROJECT)_$(BRD).xst -ofn $(PROJECT)_$(BRD).syr
 	mv $(PROJECT).ngc $(PROJECT)_$(BRD).ngc
 
@@ -13,7 +19,7 @@ $(PROJECT)_$(BRD).ngd: $(PROJECT)_$(BRD).ngc
 $(PROJECT)_$(BRD).ncd: $(PROJECT)_$(BRD).ngd
 	map -intstyle ise -p $(PART) \
 	-w -detail -ir off -ignore_keep_hierarchy -pr b -timing -ol high -logic_opt on  \
-	-o $(PROJECT)_$(BRD).ncd $(PROJECT)_$(BRD).ngd $(PROJECT)_$(BRD).pcf 
+	-o $(PROJECT)_$(BRD).ncd $(PROJECT)_$(BRD).ngd $(PROJECT)_$(BRD).pcf
 
 $(PROJECT)_$(BRD)_routed.ncd: $(PROJECT)_$(BRD).ncd
 	par -w -intstyle ise -ol high $(PROJECT)_$(BRD).ncd $(PROJECT)_$(BRD)_routed.ncd $(PROJECT)_$(BRD).pcf
