@@ -3,11 +3,11 @@
 // This is a simple design for echoing characters received from a host
 // back to the host from an FPGA module.
 //**********************************************************************
-module EchoTest(
+module EchoTestVerilog(
   input fpgaClk_i
 );
 
-// architecture arch of EchoTest is
+// architecture arch of EchoTestVerilog is
   // signal clk_s                : std_logic;         -- Clock.
   // signal reset_s              : std_logic  := HI;  -- Active-high reset.
   // signal rmv_r                : std_logic  := LO;
@@ -58,7 +58,6 @@ module EchoTest(
     .upFull_o(full_s)
     );
   defparam u2.SIMPLE_G = 1;
-  defparam u2.MODULE_ID_G = 255;
 
   // This process scans the incoming FIFO for characters received from the host.
   // Then it removes a character from the host FIFO and places it in the FIFO that

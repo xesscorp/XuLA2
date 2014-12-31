@@ -1,11 +1,11 @@
 set -tmpdir "xst/projnav.tmp"
 set -xsthdpdir "xst"
 run
--ifn EchoTest.prj
--ofn EchoTest
+-ifn EchoTestVerilog.prj
+-ofn EchoTestVerilog
 -ofmt NGC
 -p xc6slx9-2-ftg256
--top EchoTest
+-top EchoTestVerilog
 -opt_mode Speed
 -opt_level 1
 -power NO
