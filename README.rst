@@ -1,13 +1,8 @@
-==========================================
-XuLA2 FPGA Board Repository
-==========================================
 
-----------------------------------------------------
-Where you'll find *everything* XuLA2-related!
-----------------------------------------------------
+# XuLA2 FPGA Board Repository
+Here you can everything XuLA2-related!
 
 This repo integrates everything for the XuLA2 FPGA board into one place:
-
     pcb/:
         Here's where you'll find the schematic and PCB layout stored as Eagle 5 files.
         
